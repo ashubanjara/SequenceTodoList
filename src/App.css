@@ -1,38 +1,67 @@
-.App {
-  text-align: center;
+body {
+    margin: 0;
+    background: #83b5cc;
+    min-height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.main-container {
+    margin: 0 auto;
+    margin-top: 1em;
+    background: lightgoldenrodyellow;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    position: relative;
+    width: 50%;
+    height: 71vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid 1px black;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.clear-btn {
+    font-size: 14px;
+    padding: 8px 20px;
+    background: rgba(0,0,0,0);
+    border: 1px solid red;
+    border-radius: 20px;
+    color: red;
+    margin-right: 1.6em;
+    cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.list-item-container {
+    overflow-y: auto;
+    height: 60vh;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.list-item-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* .list-item-container::-webkit-scrollbar-track {
+} */
+
+.list-item-container::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: rgba(0,0,0,0.3)
+}
+
+.greeting {
+    text-align: center;
+    margin-top: 2em;
+    font-size: 34px;
+    font-weight: 500;
+    color: black;
+}
+
+.date {
+    padding: 1em;
+    font-size: 22px;
+}
+
+.date-decoration {
+    font-size: 21.5px;
 }

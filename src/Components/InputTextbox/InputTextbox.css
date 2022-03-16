@@ -1,0 +1,29 @@
+.input-textbox-container {
+    margin: 0 auto;
+    text-align: center;
+    width: 50%;
+    margin-top: 1em;
+}
+
+.input-textbox {
+    width: 100%;
+    text-align: left;
+    background: lightgoldenrodyellow;
+    border: none;
+    margin-top: 0.2em;
+    box-sizing: border-box;
+    height: 3.6em;
+    font-size: 1.06rem;
+    padding: 0.5em 1em;
+    color: black;
+    transition: transform 0.1s;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.input-textbox:focus {
+    outline: none;
+}
+
+.input-textbox:hover {
+    transform: scale(1.005);
+}
