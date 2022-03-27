@@ -5,9 +5,10 @@
     margin: 0 auto;
     user-select: none;
     font-size: 17px;
-    padding: 1em 1em;
+    padding: 16px 16px;
     cursor: pointer;
-    border-bottom: 1px solid black;
+    border: 1px solid gray;
+    margin-top: -0.8px;
 }
 
 .list-item-text {

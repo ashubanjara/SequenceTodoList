@@ -4,6 +4,7 @@ import InputTextbox from './Components/InputTextbox/InputTextbox';
 import { getCurrentDate } from './Utils/utils';
 import './App.css';
 import { Button, Dialog, DialogActions, DialogTitle } from '@mui/material';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 class App extends Component {
 
@@ -19,6 +20,8 @@ class App extends Component {
         this.deleteListItem = this.deleteListItem.bind(this);
         this.updateChecked = this.updateChecked.bind(this);
         this.clearItems = this.clearItems.bind(this);
+        this.onDragEnd = this.onDragEnd.bind(this);
+        this.scrollToBottom = this.scrollToBottom.bind(this);
     }
 
     componentDidMount(){
@@ -35,7 +38,7 @@ class App extends Component {
             return {listItems: [...prevState.listItems, {text: item.text, checked: item.checked}]}
         },
         () => {
-            console.log(this.state.listItems)
+            this.scrollToBottom()
             this.updateLocalStorage()
         }
         )
@@ -67,6 +70,26 @@ class App extends Component {
             })
     }
 
+    scrollToBottom(){
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+      }
+
+    // Drag and drop functions
+
+    onDragEnd(result){
+        if (!result) {
+            return
+        }
+        const updatedListItems = [...this.state.listItems];
+        const [reorderedItem] = updatedListItems.splice(result.source.index, 1);
+        updatedListItems.splice(result.destination.index, 0, reorderedItem)
+        console.log(updatedListItems)
+        this.setState({listItems: updatedListItems},
+            () => {
+                this.updateLocalStorage()
+            })
+    }
+
     render(){
         const { listItems, dialogIsOpen } = this.state
 
@@ -87,18 +110,31 @@ class App extends Component {
                             CLEAR ALL
                         </button>
                     </div>
-                    <div className="list-item-container">
-                        {listItems.map((item, index) => 
-                            <ListItem 
-                            key={index} 
-                            deleteListItem={this.deleteListItem}
-                            updateChecked={this.updateChecked} 
-                            id={index} 
-                            text={item.text} 
-                            checked={item.checked}
-                            />
-                        )}
-                    </div>
+                    
+                        <DragDropContext onDragEnd={this.onDragEnd}>
+                            <Droppable droppableId='listItems'>
+                                {(provided) => (
+                                    <div 
+                                    className="list-item-container" 
+                                    {...provided.droppableProps}
+                                    ref={provided.innerRef} 
+                                    >
+                                        {listItems.map((item, index) => 
+                                            <ListItem
+                                            key={index} 
+                                            deleteListItem={this.deleteListItem}
+                                            updateChecked={this.updateChecked} 
+                                            id={index} 
+                                            text={item.text} 
+                                            checked={item.checked}
+                                            />
+                                        )}
+                                        <div className='dummy-div' ref={(el) => { this.messagesEnd = el; }}></div>
+                                        {provided.placeholder}
+                                    </div>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
                 </div>
                 <InputTextbox addListItem={this.addListItem} />
                 <Dialog
