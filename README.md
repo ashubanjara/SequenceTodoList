@@ -1,4 +1,4 @@
-# Sequence To-Do List
+# 🗒️ Sequence To-Do List
 
 A to-do list single page app made using React. Focused on being simple and intuitive to use, much like a real to-do list made using pen and paper.
 
@@ -7,7 +7,7 @@ https://sequence-todolist.netlify.app/
 
 Uses React Beautiful DnD https://github.com/atlassian/react-beautiful-dnd to allow seamless item reordering.
 
-## Current Features: 
+## ✔️ Current Features: 
 
 - Add/Delete and Check/Uncheck Items
 - Items are permanently saved to local storage
@@ -15,7 +15,7 @@ Uses React Beautiful DnD https://github.com/atlassian/react-beautiful-dnd to all
 - Shows current date
 - Clear list when you want to start over
 
-## Planned Features: 
+## 📅 Planned Features: 
 
 - Display User Name
 - Dated Items
