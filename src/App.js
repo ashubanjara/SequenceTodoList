@@ -5,6 +5,7 @@ import { getCurrentDate } from './Utils/utils';
 import './App.css';
 import { Button, Dialog, DialogActions, DialogTitle } from '@mui/material';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import UserNameInput from './Components/UserNameInput/UserNameInput';
 
 class App extends Component {
 
@@ -14,6 +15,8 @@ class App extends Component {
         this.state = {
             dialogIsOpen: false,
             listItems: [],
+            isSetup: false,
+            userName: ""
         }
 
         this.addListItem = this.addListItem.bind(this);
@@ -22,9 +25,17 @@ class App extends Component {
         this.clearItems = this.clearItems.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
         this.scrollToBottom = this.scrollToBottom.bind(this);
+        this.setUserName = this.setUserName.bind(this);
     }
 
     componentDidMount(){
+        const userName = localStorage.getItem("userName") || ""
+        if (userName !== "") {
+            this.setState({isSetup: true})
+            this.setState({userName: userName})
+        }
+        
+
         const savedData = (localStorage.getItem("ListItems") && JSON.parse(localStorage.getItem("ListItems"))) || []
         this.setState({listItems: savedData})
     }
@@ -40,6 +51,17 @@ class App extends Component {
         () => {
             this.scrollToBottom()
             this.updateLocalStorage()
+        }
+        )
+    }
+
+    setUserName(userName){
+        this.setState({
+            userName: userName,
+            isSetup: true
+        },
+        () => {
+            localStorage.setItem("userName", this.state.userName)
         }
         )
     }
@@ -83,7 +105,6 @@ class App extends Component {
         const updatedListItems = [...this.state.listItems];
         const [reorderedItem] = updatedListItems.splice(result.source.index, 1);
         updatedListItems.splice(result.destination.index, 0, reorderedItem)
-        console.log(updatedListItems)
         this.setState({listItems: updatedListItems},
             () => {
                 this.updateLocalStorage()
@@ -91,7 +112,7 @@ class App extends Component {
     }
 
     render(){
-        const { listItems, dialogIsOpen } = this.state
+        const { listItems, dialogIsOpen, isSetup, userName } = this.state
 
         return (
             <React.Fragment>
@@ -101,7 +122,13 @@ class App extends Component {
                 <div className='main-container'>
                     <div className="header-container">
                         <div className="date">
-                            Today is <span className="date-decoration">{getCurrentDate()}</span>
+                            {!isSetup ? 
+                            <div style={{display: 'flex'}}>
+                                What should we call you? 
+                                <UserNameInput setUserName={this.setUserName}/>
+                            </div>
+                             : 
+                            <div>Hi, {userName}, Today is <span className="date-decoration">{getCurrentDate()}</span></div>}
                         </div>
                         <button 
                         className="clear-btn"

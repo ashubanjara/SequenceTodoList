@@ -2,7 +2,6 @@
 export function getCurrentDate(){
     const currentDate = new Date();
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    console.log(currentDate.getDay())
     const date = 
     `
     ${days[currentDate.getDay()]}, 
