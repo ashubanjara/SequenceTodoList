@@ -1,4 +1,4 @@
-#Sequence To-Do List
+# Sequence To-Do List
 
 A to-do list single page app made using React. Focused on being simple and intuitive to use, much like a real to-do list made using pen and paper.
 
