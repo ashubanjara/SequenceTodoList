@@ -14,10 +14,11 @@ Uses React Beautiful DnD https://github.com/atlassian/react-beautiful-dnd to all
 - React DnD Support (Item reordering and smooth animations)
 - Shows current date
 - Clear list when you want to start over
+- Set/Display User Name
 
 ## 📅 Planned Features: 
 
-- Display User Name
+- Tour/Help Feature
 - Dated Items
 - Font Selection
 - Dark Mode
