@@ -12,10 +12,6 @@ class UserNameInput extends Component {
         this.handlePressEnter = this.handlePressEnter.bind(this)
     }
 
-    setTextInput(value){
-        this.setState({textInput: value})
-    }
-
     handlePressEnter(event){
         const { userName } = this.state
         if (event.key === "Enter" && userName !== ""){
@@ -25,7 +21,7 @@ class UserNameInput extends Component {
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
-      }
+    }
 
     render(){
         const { userName } = this.state;

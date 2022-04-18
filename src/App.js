@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import ListItem from './Components/ListItem/ListItem';
 import InputTextbox from './Components/InputTextbox/InputTextbox';
 import { getCurrentDate } from './Utils/utils';
-import './App.css';
 import { Button, Dialog, DialogActions, DialogTitle } from '@mui/material';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import UserNameInput from './Components/UserNameInput/UserNameInput';
+import './App.css';
 
 class App extends Component {
 
@@ -16,16 +16,19 @@ class App extends Component {
             dialogIsOpen: false,
             listItems: [],
             isSetup: false,
-            userName: ""
+            userName: "",
+            isDropDisabled: false
         }
 
         this.addListItem = this.addListItem.bind(this);
         this.deleteListItem = this.deleteListItem.bind(this);
+        this.editListItem = this.editListItem.bind(this);
         this.updateChecked = this.updateChecked.bind(this);
         this.clearItems = this.clearItems.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
         this.scrollToBottom = this.scrollToBottom.bind(this);
         this.setUserName = this.setUserName.bind(this);
+        this.setIsDropDisabled = this.setIsDropDisabled.bind(this);
     }
 
     componentDidMount(){
@@ -64,6 +67,15 @@ class App extends Component {
             localStorage.setItem("userName", this.state.userName)
         }
         )
+    }
+
+    editListItem(id, text) {
+        let newList = [...this.state.listItems]
+        newList[id].text = text
+        this.setState({listItems: newList},
+            () => {
+                this.updateLocalStorage()
+            })
     }
     
     deleteListItem(id){
@@ -111,8 +123,12 @@ class App extends Component {
             })
     }
 
+    setIsDropDisabled(bool){
+        this.setState({isDropDisabled: bool})
+    }
+
     render(){
-        const { listItems, dialogIsOpen, isSetup, userName } = this.state
+        const { listItems, dialogIsOpen, isSetup, userName, isDropDisabled } = this.state
 
         return (
             <React.Fragment>
@@ -128,7 +144,7 @@ class App extends Component {
                                 <UserNameInput setUserName={this.setUserName}/>
                             </div>
                              : 
-                            <div>Hi, {userName}, Today is <span className="date-decoration">{getCurrentDate()}</span></div>}
+                            <div>Hi {userName}, Today is <span className="date-decoration">{getCurrentDate()}</span></div>}
                         </div>
                         <button 
                         className="clear-btn"
@@ -139,7 +155,7 @@ class App extends Component {
                     </div>
                     
                         <DragDropContext onDragEnd={this.onDragEnd}>
-                            <Droppable droppableId='listItems'>
+                            <Droppable droppableId='listItems' isDropDisabled={isDropDisabled}>
                                 {(provided) => (
                                     <div 
                                     className="list-item-container" 
@@ -148,9 +164,11 @@ class App extends Component {
                                     >
                                         {listItems.map((item, index) => 
                                             <ListItem
-                                            key={index} 
+                                            key={index}
+                                            editListItem={this.editListItem} 
                                             deleteListItem={this.deleteListItem}
                                             updateChecked={this.updateChecked} 
+                                            setIsDropDisabled = {this.setIsDropDisabled}
                                             id={index} 
                                             text={item.text} 
                                             checked={item.checked}

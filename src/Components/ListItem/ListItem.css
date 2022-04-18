@@ -6,22 +6,60 @@
     user-select: none;
     font-size: 17px;
     padding: 16px 16px;
-    cursor: pointer;
+    cursor: text;
     border: 1px solid gray;
     margin-top: -0.8px;
+}
+
+.list-item-text-container {
+    display: flex;
+    align-items: center;
 }
 
 .list-item-text {
     margin-left: '8px'; 
 }
 
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.edit-icon {
+    margin-right: 10px;
+    padding: 3px 6px;
+    padding-top: 5px;
+}
+
+.edit-icon:hover {
+    cursor: pointer;
+    background: rgba(0,0,0,0.05);
+    border-radius: 50%;
+}
+
 .delete-icon {
-    margin-right: 20px;
+    margin-right: 16px;
     padding: 3px 6px;
     padding-top: 5px;
 }
 
 .delete-icon:hover {
+    cursor: pointer;
     background: rgba(0,0,0,0.05);
     border-radius: 50%;
 }
+
+.edit-container {
+    display: flex;
+    align-items: center;
+}
+
+.edit-input {
+    margin-left: 10px;
+    width: 525px;
+    font-size: 17px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid black;
+  }
