@@ -9,7 +9,7 @@ Uses React Beautiful DnD https://github.com/atlassian/react-beautiful-dnd to all
 
 ## ✔️ Current Features: 
 
-- Add/Delete and Check/Uncheck Items
+- Add/Edit/Delete and Check/Uncheck Items
 - Items are permanently saved to local storage
 - React DnD Support (Item reordering and smooth animations)
 - Shows current date
