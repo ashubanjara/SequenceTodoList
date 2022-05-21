@@ -18,6 +18,7 @@ Uses React Beautiful DnD https://github.com/atlassian/react-beautiful-dnd to all
 
 ## 📅 Planned Features: 
 
+- User Management and Cloud Saves
 - Tour/Help Feature
 - Dated Items
 - Font Selection
